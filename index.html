@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _fetch;
+            },
+            set: function(val) {
+              _fetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            var protoFetch = Window.prototype.fetch;
+            Object.defineProperty(Window.prototype, 'fetch', {
+              get: function() {
+                return protoFetch;
+              },
+              set: function(val) {
+                protoFetch = val;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (e2) {}
+        }
+
+        window.addEventListener('error', function(event) {
+          if (
+            event &&
+            event.message &&
+            event.message.indexOf('fetch') !== -1 &&
+            (event.message.indexOf('getter') !== -1 || event.message.indexOf('Cannot set property') !== -1)
+          ) {
+            event.preventDefault();
+            event.stopPropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <title>Почему люди покупают через Google Поиск — Анатомия горячего спроса</title>
+    <meta name="description" content="Экспертный продающий разбор феномена поискового трафика в Google: почему клиенты из поиска уже готовы купить и как бизнесу занять первые позиции." />
+    <meta property="og:title" content="Почему люди покупают через Google Поиск — Анатомия горячего спроса" />
+    <meta property="og:description" content="Экспертный продающий разбор феномена поискового трафика в Google: почему клиенты из поиска уже готовы купить и как бизнесу занять первые позиции." />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-blue-600 selection:text-white min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
